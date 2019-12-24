@@ -2,11 +2,12 @@ import React from 'react';
 import Button from 'antd/es/button';
 import logo from './logo.svg';
 import './App.css';
+import Routes from './routes';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Button type="primary">Get Started</Button>
+      <Routes/>
     </div>
   );
 }
