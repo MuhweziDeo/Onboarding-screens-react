@@ -1,13 +1,66 @@
 @import '~antd/dist/antd.css';
 
+body {
+  background: rgb(236, 236, 236);
+}
 .App {
+  background: rgb(236, 236, 236);
+}
+
+/* Custom */
+.layout {
+  background: white;
+  width: 30%;
+  transform: translateX(30rem);
+  margin-top: 10rem;
+  padding: 3rem;
+}
+
+.screen__header h2 {
   text-align: center;
 }
 
+.screen__header div {
+  text-align: center;
+  margin-top: -.2rem;
+}
+.screen__1 Form {
+  /* color:rgb(197, 197, 197) !important; */
+}
+
+.name__first{
+  margin-left: 5px 0;
+}
+
+.ant-input:placeholder-shown {
+  background: #F8F9FE;
+}
+.ant-typography {
+  color:rgb(197, 197, 197);
+}
+input[type='text'] {
+  background: #F8F9FE;
+  margin-bottom: .8rem;
+}
+
+.btn-continue {
+  width: 100%;
+  margin-top: 1rem;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
+textarea {
+  resize: none;
+  background: #F8F9FE;
+}
+textarea.ant-input {
+  background: #F8F9FE;
+}
+
+/* Cutsotm */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

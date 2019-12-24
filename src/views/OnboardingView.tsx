@@ -1,8 +1,14 @@
 import React from "react";
-import {OnboardingPresenter} from "../presenters";
+import { Screen1Presenter } from "../presenters";
 
-export const OnboardingView = () => {
+interface Props {
+history: ()=>void
+}
+
+export const OnboardingView: React.SFC<Props> = (props) => {
     return (
-        <OnboardingPresenter/>
+    <>
+        <Screen1Presenter />
+    </>
     )
 }
