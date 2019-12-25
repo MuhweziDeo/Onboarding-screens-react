@@ -28,15 +28,14 @@ export const Screen1Presenter: React.SFC<Props> = (props) => {
                     <Col span={11}>
                         <Typography.Text>First Name</Typography.Text>
                         <Form.Item
-                            validateStatus={(props.firstName !== ""&& props.firstName.length >= 4) ? 
-                                "success": props.firstName === "" ? "validating": "error"}
+                            validateStatus={(props.firstName !== ""&& props.firstName.trim().length >= 4) ? 
+                                "": props.firstName === "" ? "validating": "error"}
                             hasFeedback={(props.firstName !== ""&& props.firstName.length > 0)}
-                            help={(props.firstName !== ""&& props.firstName.length >= 4) ? null: 
+                            help={(props.firstName !== ""&& props.firstName.trim().length >= 4) ? null: 
                             props.firstName === "" ? null : "Name must be 4 characters"}
                             >
                         <Input
-                            allowClear
-                            onChange={({target: {value}}) => props.onChange("firstName", value) }  
+                            onChange={({target: {value}}) => props.onChange("firstName", value.trim()) }  
                             name="firstName" 
                             value={props.firstName} 
                             className="name__first" 
@@ -51,15 +50,14 @@ export const Screen1Presenter: React.SFC<Props> = (props) => {
                     <Col span={12}>
                         <Typography.Text>Last Name</Typography.Text>
                         <Form.Item
-                            validateStatus={(props.lastName !== ""&& props.lastName.length >= 4) ? 
-                            "success": props.lastName === "" ? "validating": "error"}
+                            validateStatus={(props.lastName !== ""&& props.lastName.trim().length >= 4) ? 
+                            "": props.lastName === "" ? "validating": "error"}
                             hasFeedback={(props.lastName !== ""&& props.lastName.length > 0)}
-                            help={(props.lastName !== ""&& props.lastName.length >= 4) ? null: 
+                            help={(props.lastName !== ""&& props.lastName.trim().length >= 4) ? null: 
                             props.lastName === "" ? null : "Name must be 4 characters"}
                         >
                         <Input 
-                            allowClear
-                            onChange={({target: {value}}) => props.onChange("lastName", value) } 
+                            onChange={({target: {value}}) => props.onChange("lastName", value.trim()) } 
                             name="lastName" value={props.lastName} 
                             className="name__last" 
                             size="large" 
@@ -72,15 +70,14 @@ export const Screen1Presenter: React.SFC<Props> = (props) => {
                     <Typography.Text>Email</Typography.Text>
                     <Form.Item 
                         validateStatus={(props.email !== ""&& validateEmail(props.email)) ? 
-                        "success": props.email === "" ? "validating": "error"}
+                        "": props.email === "" ? "validating": "error"}
                         hasFeedback={(props.email !== ""&& props.email.length > 0)}
                         help={(props.email !== ""&& validateEmail(props.email)) ? null: 
                         props.email === "" ? null : "Please enter a valid email"}
                         >
                     <Input
                         type="email" 
-                        allowClear
-                        onChange={({target: {name, value}}) => props.onChange("email", value) } 
+                        onChange={({target: {name, value}}) => props.onChange("email", value.trim()) } 
                         name="email" 
                         value={props.email} 
                         size="large" />
@@ -92,14 +89,13 @@ export const Screen1Presenter: React.SFC<Props> = (props) => {
                     <Typography.Text>Phone Number</Typography.Text>
                     <Form.Item
                         validateStatus={(props.phoneNumber !== ""&& validatePhone(props.phoneNumber)) ? 
-                        "success": props.phoneNumber === "" ? "validating": "error"}
+                        "": props.phoneNumber === "" ? "validating": "error"}
                         hasFeedback={(props.phoneNumber !== ""&& props.phoneNumber.length > 0)}
                         help={(props.phoneNumber !== ""&& validatePhone(props.phoneNumber)) ? null: 
                         props.phoneNumber === "" ? null : "Please provide a valid phone number"}
                         >
                         <Input 
-                            allowClear
-                            onChange={({target: {value}}) => props.onChange("phoneNumber", value) } 
+                            onChange={({target: {value}}) => props.onChange("phoneNumber", value.trim()) } 
                             name="phoneNumber" 
                             value={props.phoneNumber} 
                             size="large" 
@@ -110,8 +106,8 @@ export const Screen1Presenter: React.SFC<Props> = (props) => {
 
                 <Row>
                     <Button 
-                    disabled={props.disabled || !validateEmail(props.email) || !validatePhone(props.phoneNumber) || !(props.lastName.length >= 4) || !(props.firstName.length >= 4)} 
-                    onClick={props.submit} className="btn-continue" type="primary" shape="round"  size="large"
+                        disabled={props.disabled || !validateEmail(props.email) || !validatePhone(props.phoneNumber) || !(props.lastName.trim().length >= 4) || !(props.firstName.trim().length >= 4)} 
+                        onClick={props.submit} className="btn-continue" type="primary" shape="round"  size="large"
                     >
                         Continue
                     </Button>

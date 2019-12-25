@@ -21,7 +21,7 @@ export const Screen3Presenter: React.SFC<Props> = props => {
                     <Typography.Text>Why are u intrested in Software Engineering?</Typography.Text>
                     <Form.Item
                          validateStatus={(props.interest !== ""&& props.interest.length >= 10) ? 
-                         "success": props.interest === "" ? "validating": "error"}
+                         "": props.interest === "" ? "validating": "error"}
                          hasFeedback={(props.interest !== ""&& props.interest.length > 0)}
                          help={(props.interest !== ""&& props.interest.length >= 10) ? null: 
                          props.interest === "" ? null : "Experience must be atleast 10 characters"}

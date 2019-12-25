@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Screen2Presenter } from "../../presenters";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebase";
@@ -18,14 +18,13 @@ export const Screen2View:React.SFC = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const [userId, setUserId] = useState<string>("");
-    
-    useEffect(() => {
+
+    useMemo(()=> {
         const id = (history.location.state && history.location.state.userId) ? 
             history.location.state.userId : history.location.search.split("user_id=")[1];
         setUserId(id);
-    })
+    }, [history.location.state, history.location.search]);
     
-
     const submit = async() => {
         try {
             setLoading(true);

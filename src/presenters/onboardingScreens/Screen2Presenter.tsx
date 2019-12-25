@@ -24,10 +24,10 @@ export const Screen2Presenter: React.SFC<Props> = props => {
                 <Row>
                     <Typography.Text>What College did you go to?</Typography.Text>
                     <Form.Item 
-                        validateStatus={(props.college !== ""&& props.college.length >= 4) ? 
-                        "success": props.college === "" ? "validating": "error"}
-                        hasFeedback={(props.college !== ""&& props.college.length > 0)}
-                        help={(props.college !== ""&& props.college.length >= 4) ? null: 
+                        validateStatus={(props.college !== ""&& props.college.trim().length >= 4) ? 
+                        "": props.college === "" ? "validating": "error"}
+                        hasFeedback={(props.college !== ""&& props.college.trim().length > 0)}
+                        help={(props.college !== ""&& props.college.trim().length >= 4) ? null: 
                         props.college === "" ? null : "College must be 4 characters"}
                     >
                     <Input 
