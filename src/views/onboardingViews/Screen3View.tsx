@@ -15,16 +15,17 @@ export const Screen3View = () => {
                     history.location.state.regId : history.location.search.split("reg_id=")[1];           
         try {
             const doc = await db.collection('registration').doc(regId).get()
-            setLoading(false);
             if(doc.exists) {
+                setLoading(false);
                 await doc.ref.update({interest});
                 message.success("Thank You for completing the on boarding");
                 setInterest("");
-                return;
+                return history.push("/");
             }
             message.error("Error It seems Session was lost");
         } catch (error) {
-            
+            setLoading(false);
+            message.error("Error Something went wrong");
         }
     }
     return (

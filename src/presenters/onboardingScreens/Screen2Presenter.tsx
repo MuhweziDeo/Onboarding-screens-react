@@ -23,35 +23,50 @@ export const Screen2Presenter: React.SFC<Props> = props => {
             <Form>
                 <Row>
                     <Typography.Text>What College did you go to?</Typography.Text>
+                    <Form.Item 
+                        validateStatus={(props.college !== ""&& props.college.length >= 4) ? 
+                        "success": props.college === "" ? "validating": "error"}
+                        hasFeedback={(props.college !== ""&& props.college.length > 0)}
+                        help={(props.college !== ""&& props.college.length >= 4) ? null: 
+                        props.college === "" ? null : "College must be 4 characters"}
+                    >
                     <Input 
                         value={props.college} 
                         onChange={({target: {value}}) => props.onChangeCollege(value)} 
                         size="large" 
                     />
+                    </Form.Item>
                 </Row>
 
                 <Row>
                     <Typography.Text>What was the last company you worked at ?</Typography.Text>
+                    <Form.Item 
+                    >
                     <Input
                         value={props.company} 
                         onChange={({target: {value}}) => props.onChangeCompany(value)}  
                         size="large" 
                     />
+                    </Form.Item>
+                    
                 </Row>
 
                 <Row>
                     <Typography.Text>How many years of experience do you have?</Typography.Text>
+                    <Form.Item>
                     <Input
                         value={props.experience} 
                         onChange={({target: {value}}) => props.onChangeExperience(Number(value))} 
                         size="large"
                         type="number" 
                     />
+                    </Form.Item>
+                    
                 </Row>
 
                 <Row>
                     <Button 
-                        disabled={props.disabled} 
+                        disabled={props.disabled || !(props.college.length >= 4)} 
                         onClick={props.submit}
                         className="btn-continue" 
                         type="primary" 
