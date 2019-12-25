@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Screen1Presenter } from "../../presenters";
 import {message} from "antd";
@@ -18,7 +18,7 @@ type Action =
  | { type: 'phoneNumber', payload: string }
  | { type: 'lastName', payload: string }
  | { type: 'email', payload: string }
- | { type: 'loading', payload: boolean }
+ | { type: 'loading', payload: {isLoading: boolean, error?: any} }
  | { type: 'firstName', payload: string };
 
 
@@ -33,13 +33,14 @@ const reducer = (state: State, action: Action): State => {
     case 'phoneNumber':
         return {...state, phoneNumber: action.payload}
     case "loading":
-        return {...state, isLoading: action.payload};   
+        if(action.payload.error) {message.error(action.payload.error)};
+        return {...state, isLoading: action.payload.isLoading};    
     default:
       return state;
   }
 }
 
-export const Screen1View = () => {
+export const Screen1View: React.SFC = (): JSX.Element => {
     const history = useHistory();
     const {location: {state: locationState}} = history;
     const initialState = { 
@@ -48,18 +49,19 @@ export const Screen1View = () => {
         firstName: (locationState && locationState.firstName) || ""
     };
     const [state, dispatch] = useReducer(reducer, initialState);
+
     const submit = async() => {
-        dispatch({type: "loading", payload: true});
         try {
+            dispatch({type: "loading", payload: {isLoading: true}});
             const user = await db.collection("users").add({
                 ...state
             });
-            dispatch({type: "loading", payload: false});
+            dispatch({type: "loading", payload: {isLoading: false}});
             message.success("Great Now Some Basic Questions ");
-            return history.push({pathname: `/onboarding/2`, state: {userId: user.id}});
+            return history.push({pathname: `/onboarding/2`, state: {userId: user.id}, search: `?user_id=${user.id}`});
         } catch (error) {
-            dispatch({type: "loading", payload: false});
-            message.error("Something went wrong");
+            dispatch({type: "loading", payload: {isLoading: false, 
+                error: error.message || "Something went wrong"}});
         }
     }
     return (

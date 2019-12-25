@@ -20,7 +20,8 @@ export const LandingView: SFC = () => {
                 return history.push({pathname: "/onboarding/1", state: {firstName, lastName, email}});
             }
             } catch (error) {
-                
+                setLoadin(false);
+                message.error(error.message)
             }
         
     }
