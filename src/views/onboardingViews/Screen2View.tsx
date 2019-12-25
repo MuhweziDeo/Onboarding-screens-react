@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Screen2Presenter } from "../../presenters";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebase";
-import firebase from "firebase";
 import { message } from "antd";
 
 
@@ -38,7 +37,8 @@ export const Screen2View:React.SFC = () => {
                 state: {regId: registration.id}, 
                 search: `?reg_id=${registration.id}`})
         } catch (error) {
-            
+            setLoading(false);
+            message.error("Something went wrong");
         }
         
     }

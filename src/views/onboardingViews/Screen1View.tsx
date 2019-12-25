@@ -59,6 +59,7 @@ export const Screen1View = () => {
             return history.push({pathname: `/onboarding/2`, state: {userId: user.id}});
         } catch (error) {
             dispatch({type: "loading", payload: false});
+            message.error("Something went wrong");
         }
     }
     return (
