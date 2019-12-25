@@ -1,8 +1,14 @@
 import React from "react";
 import { Layout } from "../../shared/Layout";
-import { Row, Typography, Form, Col, Input, Button, } from "antd";
+import { Row, Typography, Form, Input, Button, } from "antd";
 
-export const Screen3Presenter: React.SFC = props => {
+interface Props {
+    disabled: boolean;
+    interest: string;
+    onChangeIntrest(value: string): void;
+    submit(): void;
+}
+export const Screen3Presenter: React.SFC<Props> = props => {
     return (
         <Layout>
             <Row className="screen__header">
@@ -12,12 +18,16 @@ export const Screen3Presenter: React.SFC = props => {
 
             <Form>
                 <Row>
-                    <Typography.Text>What College did you go to?</Typography.Text>
-                    <Input.TextArea rows={8} />
+                    <Typography.Text>Why are u intrested in Software Engineering?</Typography.Text>
+                    <Input.TextArea 
+                        value={props.interest} 
+                        onChange={({target: {value}}) => props.onChangeIntrest(value)} 
+                        rows={8} 
+                    />
                 </Row>
                 
                 <Row>
-                    <Button className="btn-continue" type="primary" shape="round" size="large">
+                    <Button onClick={props.submit} disabled={props.disabled} className="btn-continue" type="primary" shape="round" size="large">
                         Finish
                     </Button>
                 </Row>

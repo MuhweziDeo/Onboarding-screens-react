@@ -3,8 +3,19 @@ import { Typography, Row, Col, Form, Input, Button } from "antd";
 import { Layout } from "../../shared/Layout";
 
 
-export const Screen1Presenter: React.SFC = (props) => {
-    console.log(props);
+type name = "email" | "phoneNumber" | "lastName" | "firstName";
+
+interface Props {
+    lastName: string;
+    firstName: string;
+    email: string;
+    phoneNumber: string;
+    submit: () => void;
+    onChange(name: name, value: string): any;
+    disabled?: boolean;
+}
+
+export const Screen1Presenter: React.SFC<Props> = (props) => {
     return (
         <Layout>
         <Row className="screen__1">
@@ -16,7 +27,12 @@ export const Screen1Presenter: React.SFC = (props) => {
                 <Row className="name">
                     <Col span={11}>
                         <Typography.Text>First Name</Typography.Text>
-                        <Input className="name__first" size="large" />
+                        <Input 
+                            onChange={({target: {value}}) => props.onChange("firstName", value) }  
+                            name="firstName" 
+                            value={props.firstName} 
+                            className="name__first" 
+                            size="large" />
                     </Col>
 
                     <Col span={1}>
@@ -24,26 +40,39 @@ export const Screen1Presenter: React.SFC = (props) => {
                     </Col>
                     <Col span={12}>
                         <Typography.Text>Last Name</Typography.Text>
-                        <Input className="name__last" size="large" />
+                        <Input 
+                            onChange={({target: {value}}) => props.onChange("lastName", value) } 
+                            name="lastName" value={props.lastName} 
+                            className="name__last" 
+                            size="large" 
+                        />
                     </Col>
                 </Row>
                 <Row>
                     <Typography.Text>Email</Typography.Text>
-                    <Input size="large" />
+                    <Input 
+                        onChange={({target: {name, value}}) => props.onChange("email", value) } 
+                        name="email" 
+                        value={props.email} 
+                        size="large" />
                 </Row>
 
                 <Row>
                     <Typography.Text>Phone Number</Typography.Text>
-                    <Input size="large" />
+                    <Input 
+                        onChange={({target: {name, value}}) => props.onChange("phoneNumber", value) } 
+                        name="phoneNumber" 
+                        value={props.phoneNumber} 
+                        size="large" 
+                    />
                 </Row>
 
                 <Row>
-                    <Button className="btn-continue" type="primary" shape="round" size="large">
+                    <Button disabled={props.disabled || false} onClick={props.submit} className="btn-continue" type="primary" shape="round"  size="large">
                         Continue
                     </Button>
                 </Row>
             </Form>
-
         </Row>
         </Layout>
     )
