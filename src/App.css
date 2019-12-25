@@ -60,6 +60,21 @@ textarea.ant-input {
   background: #F8F9FE;
 }
 
+.google__btn {
+  text-align: center;
+}
+
+.landing {
+  text-align: center;
+  transform: translateY(50%);
+  height: 50vh;
+  background: white;
+  padding: 8rem;
+}
+.landing__text {
+  margin-top: 2rem;
+}
+
 /* Cutsotm */
 
 @media (prefers-reduced-motion: no-preference) {
